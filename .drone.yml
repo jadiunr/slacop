@@ -1,0 +1,13 @@
+---
+kind: pipeline
+name: publish
+
+steps:
+- name: publish
+  image: plugins/gcr
+  settings:
+    registry: asia.gcr.io
+    repo: jadiunr/bigbrother
+    tags: latest
+    json_key:
+      from_secret: google_credentials

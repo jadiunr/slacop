@@ -1,31 +1,49 @@
 use strict;
 use warnings;
 use utf8;
-
-use YAML::Tiny;
+use Encode 'decode_utf8';
 use Slack::RTM::Bot;
 
 use lib 'lib';
 use Slack::WebAPI;
 
-my $config = YAML::Tiny->read('config.yml')->[0];
-my $rtm = Slack::RTM::Bot->new(token => $config->{token});
+my $rtm = Slack::RTM::Bot->new(token => $ENV{BIGBRO_TOKEN});
 my $api = Slack::WebAPI->new(
-  token => $config->{token},
-  username => $config->{username},
-  icon_url => $config->{icon_url}
+  token => $ENV{BIGBRO_TOKEN},
+  username => decode_utf8($ENV{BIGBRO_USERNAME}),
+  icon_url => $ENV{BIGBRO_ICON_URL}
 );
 
 $rtm->on({subtype => 'message_deleted'}, sub {
-  my $response = shift;
-  my $channel = $response->{channel};
-  my $text = $response->{previous_message}{text};
-  my $user = $response->{previous_message}{user};
+  my $res = shift;
+  my $channel = $res->{channel};
+  my $prev = $res->{previous_message};
+  my $text = $prev->{text};
+  my $user = $prev->{user};
+  my $thread_ts = $prev->{thread_ts};
 
-  $api->post_message(
-    channel => $channel,
-    text => "<\@${user}> deleted the message.\n\n${text}"
-  );
+  if ($prev->{files}) {
+    my $file = $prev->{files}[0];
+    
+    $api->upload(
+      channel => $channel,
+      filetype => $file->{filetype},
+      title => $file->{title},
+      initial_comment => "🔥🔥🔥 <\@${user}> DELETED THE MESSAGE 🔥🔥🔥\n\n${text}",
+      file_url => $file->{url_private},
+      thread_ts => $thread_ts
+    );
+  } else {
+    $api->post_message(
+      channel => $channel,
+      text => "🔥🔥🔥 <\@${user}> DELETED THE MESSAGE 🔥🔥🔥\n\n${text}",
+      thread_ts => $thread_ts
+    );
+  }
 });
 
-$rtm->start_RTM(sub {while (1) {sleep 1}});
+$rtm->start_RTM(sub {
+  print "RTM Start.\n";
+  print "Big Brother is watching you.\n";
+  while (1) {sleep 1}
+});

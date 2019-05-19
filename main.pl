@@ -7,6 +7,9 @@ use Slack::RTM::Bot;
 use lib 'lib';
 use Slack::WebAPI;
 
+# Autoflush
+$| = 1;
+
 my $rtm = Slack::RTM::Bot->new(token => $ENV{BIGBRO_TOKEN});
 my $api = Slack::WebAPI->new(
   token => $ENV{BIGBRO_TOKEN},

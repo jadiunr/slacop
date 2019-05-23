@@ -3,8 +3,9 @@ package Slack::WebAPI;
 use strict;
 use warnings;
 use utf8;
-use Encode 'encode_utf8';
+use Encode qw/ encode_utf8 /;
 use File::Temp 'tempfile';
+use JSON;
 
 use HTTP::Request::Common;
 use Furl;
@@ -33,7 +34,8 @@ sub post_message {
         username => $self->{username},
         icon_url => $self->{icon_url},
         thread_ts => $args{thread_ts},
-        reply_broadcast => 'true'
+        reply_broadcast => 'true',
+        attachments => to_json [{text => $args{deleted_text}}]
       ]
     ));
   };

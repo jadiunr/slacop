@@ -21,9 +21,11 @@ $rtm->on({subtype => 'message_deleted'}, sub {
   my $res = shift;
   my $channel = $res->{channel};
   my $prev = $res->{previous_message};
-  my $text = $prev->{text};
-  my $user = $prev->{user};
-  my $thread_ts = $prev->{thread_ts};
+
+  my $sending_text = $prev->{user} ? "🔥🔥🔥 <\@$prev->{user}>'S MESSAGE HAS BEEN DELETED. 🔥🔥🔥"
+                                   : $prev->{text};
+  my $deleted_text = $prev->{user} ? $prev->{text}
+                                   : $prev->{attachments}[0]{text};
 
   if ($prev->{files}) {
     my $file = $prev->{files}[0];
@@ -32,15 +34,17 @@ $rtm->on({subtype => 'message_deleted'}, sub {
       channel => $channel,
       filetype => $file->{filetype},
       title => $file->{title},
-      initial_comment => "🔥🔥🔥 <\@${user}> DELETED THE MESSAGE 🔥🔥🔥\n\n${text}",
+      initial_comment => $prev->{user} ne $ENV{BIGBRO_USER_ID} ? "${sending_text}\n\n${deleted_text}"
+                                                               : $deleted_text,
       file_url => $file->{url_private},
-      thread_ts => $thread_ts
+      thread_ts => $prev->{thread_ts}
     );
   } else {
     $api->post_message(
       channel => $channel,
-      text => "🔥🔥🔥 <\@${user}> DELETED THE MESSAGE 🔥🔥🔥\n\n${text}",
-      thread_ts => $thread_ts
+      text => $sending_text,
+      deleted_text => $deleted_text,
+      thread_ts => $prev->{thread_ts}
     );
   }
 });

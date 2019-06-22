@@ -35,7 +35,7 @@ sub post_message {
         icon_url => $self->{icon_url},
         thread_ts => $args{thread_ts},
         reply_broadcast => 'true',
-        attachments => to_json [{text => $args{deleted_text}}]
+        attachments => to_json $args{attachments}
       ]
     ));
   };

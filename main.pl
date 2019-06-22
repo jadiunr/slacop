@@ -83,8 +83,8 @@ $rtm->on({type => 'message'}, sub {
   );
 });
 
-$rtm->start_RTM(sub {
-  print "RTM Start.\n";
-  print "Big Brother is watching you.\n";
-  while (1) {sleep 60}
-});
+while(1) {
+  $rtm->start_RTM;
+  sleep 86400;
+  $rtm->stop_RTM;
+}

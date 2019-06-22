@@ -61,6 +61,7 @@ $rtm->on({type => 'message'}, sub {
   return unless $res->{user};
 
   for my $excluded_word (@{$inside_jokes->{excluded}}) {
+    $source_text =~ s/\n|\t| |　//g;
     $source_text =~ s/$excluded_word//g;
   }
 

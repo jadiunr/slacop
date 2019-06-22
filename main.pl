@@ -66,6 +66,8 @@ $rtm->on({type => 'message'}, sub {
     ) if $res->{text} =~ $inside_joke->{joke};
   }
 
+  return unless @$included_jokes;
+
   $" = "\n";
   $api->post_message(
     channel => $res->{channel},

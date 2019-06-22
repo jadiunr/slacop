@@ -25,7 +25,7 @@ $rtm->on({subtype => 'message_deleted'}, sub {
   my $channel = $res->{channel};
   my $prev = $res->{previous_message};
 
-  my $sending_text = $prev->{user} ? "🔥🔥🔥 <\@$prev->{user}>'S MESSAGE HAS BEEN DELETED. 🔥🔥🔥"
+  my $sending_text = $prev->{user} ? "🔥🔥🔥 <\@$prev->{user}> のメッセージが削除されました。 🔥🔥🔥"
                                    : $prev->{text};
   my $deleted_text = $prev->{user} ? [{text => $prev->{text}}]
                                    : [map {{text => $_->{text}}} @{$prev->{attachments}}];
@@ -76,7 +76,7 @@ $rtm->on({type => 'message'}, sub {
   $" = "\n";
   $api->post_message(
     channel => $res->{channel},
-    text => "🔥 <\@$res->{user}> INSIDE JOKE INCLUSION. 🔥",
+    text => "🔥 <\@$res->{user}> 内輪ネタが含まれている可能性があります。 🔥",
     attachments => [{text => "@$included_jokes"}, {text => $res->{text}}],
     thread_ts => $res->{thread_ts}
   );

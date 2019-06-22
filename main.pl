@@ -56,14 +56,19 @@ $rtm->on({subtype => 'message_deleted'}, sub {
 $rtm->on({type => 'message'}, sub {
   my $res = shift;
   my $included_jokes = [];
+  my $source_text = $res->{text};
 
   return unless $res->{user};
 
-  for my $inside_joke (@$inside_jokes) {
+  for my $excluded_word (@{$inside_jokes->{excluded}}) {
+    $source_text =~ s/$excluded_word//g;
+  }
+
+  for my $inside_joke (@{$inside_jokes->{jokes}}) {
     push(
       @$included_jokes,
       "$inside_joke->{joke} => $inside_joke->{mean}"
-    ) if $res->{text} =~ $inside_joke->{joke};
+    ) if $source_text =~ $inside_joke->{joke};
   }
 
   return unless @$included_jokes;

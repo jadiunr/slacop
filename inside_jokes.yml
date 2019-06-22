@@ -1,6 +1,14 @@
+jokes:
 - joke: ミズ
   mean: 唐揚げ
 - joke: 自己責任
   mean: 飲み会
 - joke: 学生気分
   mean: フライドポテト
+- joke: 學生気分
+  mean: フライドポテト
+
+excluded:
+- ミミズ
+- ミズノ
+- ミズノミドリ

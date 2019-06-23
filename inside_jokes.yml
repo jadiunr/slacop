@@ -1,4 +1,3 @@
-jokes:
 - joke: ミズ
   mean: 唐揚げ
 - joke: 自己責任
@@ -7,8 +6,4 @@ jokes:
   mean: フライドポテト
 - joke: 學生気分
   mean: フライドポテト
-
-excluded:
-- ミミズ
-- ミズノ
-- ミズノミドリ
+  consolidation: true

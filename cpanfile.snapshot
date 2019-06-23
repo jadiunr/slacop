@@ -1,5 +1,14 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
+  Class-Accessor-0.51
+    pathname: K/KA/KASEI/Class-Accessor-0.51.tar.gz
+    provides:
+      Class::Accessor 0.51
+      Class::Accessor::Fast 0.51
+      Class::Accessor::Faster 0.51
+    requirements:
+      ExtUtils::MakeMaker 0
+      base 1.01
   Class-Accessor-Lite-0.08
     pathname: K/KA/KAZUHO/Class-Accessor-Lite-0.08.tar.gz
     provides:
@@ -28,6 +37,13 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       strict 0
       vars 0
+  Convert-Moji-0.10
+    pathname: B/BK/BKB/Convert-Moji-0.10.tar.gz
+    provides:
+      Convert::Moji 0.10
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.008001
   Data-OptList-0.110
     pathname: R/RJ/RJBS/Data-OptList-0.110.tar.gz
     provides:
@@ -47,6 +63,16 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 0
       PadWalker 0.08
       Test::More 0
+  Devel-CheckLib-1.13
+    pathname: M/MA/MATTN/Devel-CheckLib-1.13.tar.gz
+    provides:
+      Devel::CheckLib 1.13
+    requirements:
+      Exporter 0
+      ExtUtils::MakeMaker 0
+      File::Spec 0
+      File::Temp 0.16
+      perl 5.00405
   Devel-LexAlias-0.05
     pathname: R/RC/RCLAMP/Devel-LexAlias-0.05.tar.gz
     provides:
@@ -55,11 +81,11 @@ DISTRIBUTIONS
       Devel::Caller 0.03
       ExtUtils::MakeMaker 0
       Test::More 0
-  Devel-StackTrace-2.03
-    pathname: D/DR/DROLSKY/Devel-StackTrace-2.03.tar.gz
+  Devel-StackTrace-2.04
+    pathname: D/DR/DROLSKY/Devel-StackTrace-2.04.tar.gz
     provides:
-      Devel::StackTrace 2.03
-      Devel::StackTrace::Frame 2.03
+      Devel::StackTrace 2.04
+      Devel::StackTrace::Frame 2.04
     requirements:
       ExtUtils::MakeMaker 0
       File::Spec 0
@@ -229,6 +255,19 @@ DISTRIBUTIONS
       HTML::Tagset 3
       XSLoader 0
       perl 5.008
+  HTML-Scrubber-0.17
+    pathname: N/NI/NIGELM/HTML-Scrubber-0.17.tar.gz
+    provides:
+      HTML::Scrubber 0.17
+    requirements:
+      ExtUtils::MakeMaker 0
+      HTML::Entities 0
+      HTML::Parser 3.47
+      List::Util 0
+      Scalar::Util 0
+      perl 5.008
+      strict 0
+      warnings 0
   HTML-Tagset-3.20
     pathname: P/PE/PETDANCE/HTML-Tagset-3.20.tar.gz
     provides:
@@ -366,6 +405,14 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
+  JSON-Parse-0.55
+    pathname: B/BK/BKB/JSON-Parse-0.55.tar.gz
+    provides:
+      JSON::Parse 0.55
+      JSON::Tokenize 0.55
+    requirements:
+      ExtUtils::MakeMaker 0
+      perl 5.008009
   LWP-MediaTypes-6.04
     pathname: O/OA/OALDERS/LWP-MediaTypes-6.04.tar.gz
     provides:
@@ -389,6 +436,49 @@ DISTRIBUTIONS
       LWP::UserAgent 6.06
       Mozilla::CA 20110101
       Net::HTTPS 6
+      perl 5.008001
+  Lingua-JA-Dakuon-0.01
+    pathname: K/KA/KAWAMURAY/Lingua-JA-Dakuon-0.01.tar.gz
+    provides:
+      Lingua::JA::Dakuon 0.01
+    requirements:
+      CPAN::Meta 0
+      CPAN::Meta::Prereqs 0
+      Exporter 0
+      ExtUtils::CBuilder 0
+      Module::Build 0.38
+      perl 5.008005
+  Lingua-JA-Moji-0.56
+    pathname: B/BK/BKB/Lingua-JA-Moji-0.56.tar.gz
+    provides:
+      Lingua::JA::Moji 0.56
+    requirements:
+      Convert::Moji 0.05
+      ExtUtils::MakeMaker 0
+      JSON::Parse 0.49
+      perl 5.008009
+  Lingua-JA-NormalizeText-0.50
+    pathname: P/PA/PAWAPAWA/Lingua-JA-NormalizeText-0.50.tar.gz
+    provides:
+      Lingua::JA::NormalizeText 0.50
+    requirements:
+      Carp 0
+      Exporter 0
+      HTML::Entities 3.66
+      HTML::Scrubber 0.10
+      Lingua::JA::Dakuon 0
+      Lingua::JA::Moji 0.32
+      Lingua::JA::Regular::Unicode 0.11
+      Module::Build 0.38
+      Unicode::Normalize 1.00
+      perl 5.008001
+  Lingua-JA-Regular-Unicode-0.13
+    pathname: T/TO/TOKUHIROM/Lingua-JA-Regular-Unicode-0.13.tar.gz
+    provides:
+      Lingua::JA::Regular::Unicode 0.13
+    requirements:
+      Exporter 5.58
+      Module::Build::Tiny 0.035
       perl 5.008001
   Mixin-Linewise-0.108
     pathname: R/RJ/RJBS/Mixin-Linewise-0.108.tar.gz
@@ -725,6 +815,44 @@ DISTRIBUTIONS
       Scalar::Util 0
       strict 0
       warnings 0
+  Test-Requires-0.10
+    pathname: T/TO/TOKUHIROM/Test-Requires-0.10.tar.gz
+    provides:
+      Test::Requires 0.10
+    requirements:
+      ExtUtils::MakeMaker 6.64
+      Test::Builder::Module 0
+      Test::More 0.47
+      perl 5.006
+  Text-MeCab-0.20016
+    pathname: D/DM/DMAKI/Text-MeCab-0.20016.tar.gz
+    provides:
+      Text::MeCab 0.20016
+      Text::MeCab::Dict undef
+      Text::MeCab::Dict::Entry undef
+    requirements:
+      Class::Accessor::Fast 0
+      Devel::CheckLib 0
+      Devel::PPPort 3.19
+      Encode 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.59
+      ExtUtils::ParseXS 2.21
+      File::Spec 0
+      Test::More 0.84
+      Test::Requires 0
+      XSLoader 0.02
+      perl 5.006
+  Text-Shirasu-0.0.4
+    pathname: C/CO/CODEHEX/Text-Shirasu-0.0.4.tar.gz
+    provides:
+      Text::Shirasu v0.0.4
+      Text::Shirasu::Node undef
+      Text::Shirasu::Tree undef
+    requirements:
+      Lingua::JA::NormalizeText 0
+      Module::Build::Tiny 0.035
+      Text::MeCab 0
   Try-Tiny-0.30
     pathname: E/ET/ETHER/Try-Tiny-0.30.tar.gz
     provides:
@@ -872,7 +1000,7 @@ DISTRIBUTIONS
       HTTP::Request 6
       HTTP::Request::Common 6
       HTTP::Response 6
-      HTTP::Status 6.18
+      HTTP::Status 6
       IO::Select 0
       IO::Socket 0
       LWP::MediaTypes 6

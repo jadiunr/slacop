@@ -3,10 +3,10 @@ use warnings;
 use utf8;
 use Encode 'decode_utf8';
 use Slack::RTM::Bot;
-use YAML::Tiny;
 
 use lib 'lib';
 use Slack::WebAPI;
+use MeCab::IJDetector;
 
 # Autoflush
 $| = 1;
@@ -17,7 +17,6 @@ my $api = Slack::WebAPI->new(
   username => decode_utf8($ENV{BIGBRO_USERNAME}),
   icon_url => $ENV{BIGBRO_ICON_URL}
 );
-my $inside_jokes = YAML::Tiny->read('./inside_jokes.yml')->[0];
 
 # Deleted message resurrection.
 $rtm->on({subtype => 'message_deleted'}, sub {
@@ -25,7 +24,7 @@ $rtm->on({subtype => 'message_deleted'}, sub {
   my $channel = $res->{channel};
   my $prev = $res->{previous_message};
 
-  my $sending_text = $prev->{user} ? "🔥🔥🔥 <\@$prev->{user}> のメッセージが削除されました。 🔥🔥🔥"
+  my $sending_text = $prev->{user} ? "🔥🔥🔥 <\@$prev->{user}> のメッセージが削除されました 🔥🔥🔥"
                                    : $prev->{text};
   my $deleted_text = $prev->{user} ? [{text => $prev->{text}}]
                                    : [map {{text => $_->{text}}} @{$prev->{attachments}}];
@@ -55,29 +54,15 @@ $rtm->on({subtype => 'message_deleted'}, sub {
 # Inside joke inclusion alarm.
 $rtm->on({type => 'message'}, sub {
   my $res = shift;
-  my $included_jokes = [];
-  my $source_text = $res->{text};
-
   return unless $res->{user};
 
-  for my $excluded_word (@{$inside_jokes->{excluded}}) {
-    $source_text =~ s/\n|\t| |　//g;
-    $source_text =~ s/$excluded_word//g;
-  }
-
-  for my $inside_joke (@{$inside_jokes->{jokes}}) {
-    push(
-      @$included_jokes,
-      "$inside_joke->{joke} => $inside_joke->{mean}"
-    ) if $source_text =~ $inside_joke->{joke};
-  }
-
+  my $included_jokes = MeCab::IJDetector->search($res->{text});
   return unless @$included_jokes;
 
   $" = "\n";
   $api->post_message(
     channel => $res->{channel},
-    text => "🔥 <\@$res->{user}> 内輪ネタが含まれている可能性があります。 🔥",
+    text => "🔥 <\@$res->{user}> 内輪ネタが含まれている可能性があります 🔥",
     attachments => [{text => "@$included_jokes"}, {text => $res->{text}}],
     thread_ts => $res->{thread_ts}
   );

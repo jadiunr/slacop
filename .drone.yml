@@ -11,3 +11,7 @@ steps:
     tags: latest
     json_key:
       from_secret: google_credentials
+
+trigger:
+  branch:
+  - master
